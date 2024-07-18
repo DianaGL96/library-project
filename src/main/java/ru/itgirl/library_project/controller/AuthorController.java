@@ -1,10 +1,8 @@
 package ru.itgirl.library_project.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.itgirl.library_project.dto.AuthorCreateDto;
 import ru.itgirl.library_project.dto.AuthorDto;
 import ru.itgirl.library_project.dto.BookDto;
 import ru.itgirl.library_project.dto.GenreDto;
@@ -29,5 +27,10 @@ public class AuthorController {
     @GetMapping("/author/v5")
     AuthorDto getAuthorByNameV5(@RequestParam("name") String name) {
         return authorService.getByNameV5(name);
+    }
+
+    @PatchMapping("/author/create")
+    AuthorDto createAuthor(@RequestBody AuthorCreateDto authorCreateDto) {
+        return authorService.createAuthor(authorCreateDto);
     }
 }
