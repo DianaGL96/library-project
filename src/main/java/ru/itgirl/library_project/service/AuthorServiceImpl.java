@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.itgirl.library_project.dto.AuthorCreateDto;
+import ru.itgirl.library_project.dto.AuthorUpdateDto;
 import ru.itgirl.library_project.model.Author;
 import ru.itgirl.library_project.dto.AuthorDto;
 import ru.itgirl.library_project.dto.BookDto;
@@ -94,6 +95,16 @@ public class AuthorServiceImpl implements AuthorService {
                 .surname(author.getSurname())
                 .books(bookDtoList)
                 .build();
+        return authorDto;
+    }
+
+    @Override
+    public AuthorDto updateAuthor(AuthorUpdateDto authorUpdateDto) {
+        Author author = authorRepository.findById(authorUpdateDto.getId()).orElseThrow();
+        author.setName(authorUpdateDto.getName());
+        author.setSurname(authorUpdateDto.getSurname());
+        Author savedAuthor = authorRepository.save(author);
+        AuthorDto authorDto = convertEntityToDto(savedAuthor);
         return authorDto;
     }
 }
