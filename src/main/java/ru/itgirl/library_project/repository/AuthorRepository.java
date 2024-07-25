@@ -8,6 +8,8 @@ import ru.itgirl.library_project.model.Book;
 import java.util.Optional;
 
 public interface AuthorRepository extends JpaRepository<Author, Long>, JpaSpecificationExecutor<Author> {
+
+    Optional<Book> findByNameAndSurname(String name, String surname);
     @Query(nativeQuery = true, value = "SELECT * FROM AUTHOR WHERE name = ?")
     Optional<Author> findAuthorByNameBySql1(String name);
 }

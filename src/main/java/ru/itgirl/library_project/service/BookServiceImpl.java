@@ -7,35 +7,40 @@ import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ru.itgirl.library_project.dto.AuthorDto;
+import ru.itgirl.library_project.dto.BookCreateDto;
 import ru.itgirl.library_project.dto.BookDto;
-import ru.itgirl.library_project.repository.BookRepository;
+import ru.itgirl.library_project.model.Author;
 import ru.itgirl.library_project.model.Book;
+import ru.itgirl.library_project.model.Genre;
+import ru.itgirl.library_project.repository.AuthorRepository;
+import ru.itgirl.library_project.repository.BookRepository;
+import ru.itgirl.library_project.repository.GenreRepository;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
     public final BookRepository bookRepository;
+    private final GenreRepository genreRepository;
+    private final AuthorRepository authorRepository;
+
     @Override
     public BookDto getByNameV1(String name) {
         Book book = bookRepository.findBookByName(name).orElseThrow();
         return convertEntityToDto(book);
     }
 
+
     @Override
     public BookDto getByNameV2(String name) {
         Book book = bookRepository.findBookByNameBySql(name).orElseThrow();
         return convertEntityToDto(book);
     }
-    private BookDto convertEntityToDto(Book book) {
-        return BookDto.builder()
-                .id(book.getId())
-                .genre(book.getGenre().getName())
-                .name(book.getName())
-                .build();
 
-    }
 
     @Override
     public BookDto getByNameV3(String name) {
@@ -45,8 +50,33 @@ public class BookServiceImpl implements BookService{
                 return cb.equal(root.get("name"), name);
             }
         });
-                Book book = bookRepository.findOne(specification).orElseThrow();
+        Book book = bookRepository.findOne(specification).orElseThrow();
         return convertEntityToDto(book);
     }
+
+    @Override
+    public BookDto createBook(BookCreateDto bookCreateDto) {
+        Book book = bookRepository.save(convertDtoToEntity(bookCreateDto));
+        return convertEntityToDto(book);
+    }
+
+    private Book convertDtoToEntity(BookCreateDto bookCreateDto) {
+        Genre genre = genreRepository.findByName(bookCreateDto.getGenre())
+                .orElseThrow(() -> new RuntimeException("Genre not found"));
+        return Book.builder()
+                .name(bookCreateDto.getName())
+                .genre(genre)
+                .build();
+    }
+
+    private BookDto convertEntityToDto(Book book) {
+        return BookDto.builder()
+                .id(book.getId())
+                .name(book.getName())
+                .genre(book.getGenre().getName())
+                .build();
+
+    }
+
 
 }
