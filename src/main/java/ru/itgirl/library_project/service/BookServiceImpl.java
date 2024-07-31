@@ -7,9 +7,7 @@ import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.itgirl.library_project.dto.AuthorDto;
-import ru.itgirl.library_project.dto.BookCreateDto;
-import ru.itgirl.library_project.dto.BookDto;
+import ru.itgirl.library_project.dto.*;
 import ru.itgirl.library_project.model.Author;
 import ru.itgirl.library_project.model.Book;
 import ru.itgirl.library_project.model.Genre;
@@ -76,6 +74,19 @@ public class BookServiceImpl implements BookService {
                 .genre(book.getGenre().getName())
                 .build();
 
+    }
+
+    @Override
+    public BookDto updateBook(BookUpdateDto bookUpdateDto) {
+        Book book = bookRepository.findById(bookUpdateDto.getId()).orElseThrow();
+        book.setName(bookUpdateDto.getName());
+        //book.setGenre(bookUpdateDto.getGenre());
+        Genre genre = genreRepository.findByName(bookUpdateDto.getGenre())
+                .orElseThrow(() -> new RuntimeException("Genre not found"));
+        book.setGenre(genre);
+        Book savedBook = bookRepository.save(book);
+        BookDto bookDto = convertEntityToDto(savedBook);
+        return bookDto;
     }
 
 
