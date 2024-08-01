@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/books.css", type="text/css">
+  <link rel="stylesheet" href="/books.css" type="text/css">
 </head>
 <body>
 <div class="container">
