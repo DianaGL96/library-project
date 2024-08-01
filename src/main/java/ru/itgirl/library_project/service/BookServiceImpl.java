@@ -94,5 +94,11 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
+    @Override
+    public List<BookDto> getAllBooks() {
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(this::convertEntityToDto).collect(Collectors.toList());
+    }
+
 
 }
