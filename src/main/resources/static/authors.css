@@ -27,13 +27,14 @@ h2 small {
     margin-bottom: 20px;
 }
 .responsive-table .table-header {
-    background-color: #FFFFE0;
+    background-color: #E6E6FA;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    font-weight: bold;
 }
 .responsive-table .table-row {
-    background-color: #F0FFF0;
+    background-color: #FFB6C1;
     box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
 }
 .responsive-table .col-1 {
