@@ -11,7 +11,8 @@
             <div class="col col-2">NAME</div>
             <div class="col col-3">GENRE</div>
         </li>
-        <#list books as book>
+        <#assign sortedBooks = books?sort_by("id")>
+        <#list sortedBooks as book>
             <li class="table-row">
                 <div class="col col-1">${book.id}</div>
                 <div class="col col-2">${book.name}</div>
