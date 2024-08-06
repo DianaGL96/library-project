@@ -1,5 +1,5 @@
 body {
-    font-family: "tempus sans itc", sans-serif;
+    font-family: "comic sans ms", sans-serif;
 }
 
 .container {
@@ -25,6 +25,7 @@ h2 small {
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
+    font-family: "comic sans ms", sans-serif;
 }
 .responsive-table .table-header {
     background-color: #FFFFE0;
@@ -32,7 +33,7 @@ h2 small {
     text-transform: uppercase;
     letter-spacing: 0.03em;
     font-weight: bold;
-    font-family: "tempus sans itc", sans-serif;
+    font-family: "comic sans ms", sans-serif;
 }
 .responsive-table .table-header .col {
     font-weight: bold;
@@ -40,7 +41,7 @@ h2 small {
 .responsive-table .table-row {
     background-color: #F0FFF0;
     box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
-    font-family: "tempus sans itc", sans-serif;
+    font-family: "comic sans ms", sans-serif;
 }
 .responsive-table .col-1 {
     flex-basis: 10%;
