@@ -11,7 +11,8 @@
             <div class="col col-2">NAME</div>
             <div class="col col-3">SURNAME</div>
         </li>
-        <#list authors as author>
+        <#assign sortedAuthors = authors?sort_by("id")>
+        <#list sortedAuthors as author>
             <li class="table-row">
                 <div class="col col-1">${author.id}</div>
                 <div class="col col-2">${author.name}</div>

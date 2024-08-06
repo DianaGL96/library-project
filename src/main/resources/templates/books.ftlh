@@ -17,7 +17,7 @@
                 <div class="col col-1">${book.id}</div>
                 <div class="col col-2">${book.name}</div>
                 <div class="col col-3">${book.genre}</div>
-            </li>
+            </li>g
         </#list>
     </ul>
 </div>
