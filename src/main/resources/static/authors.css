@@ -1,0 +1,47 @@
+body {
+    font-family: "comic sans ms", sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 18px 0;
+    text-align: center;
+}
+h2 small {
+    font-size: 0.5em;
+}
+
+.responsive-table li {
+    border-radius: 2px;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.responsive-table .table-header {
+    background-color: #FFFFE0;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.responsive-table .table-row {
+    background-color: #F0FFF0;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+.responsive-table .col-1 {
+    flex-basis: 10%;
+}
+.responsive-table .col-2 {
+    flex-basis: 40%;
+}
+.responsive-table .col-3 {
+    flex-basis: 25%;
+}
