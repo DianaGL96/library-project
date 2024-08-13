@@ -40,16 +40,15 @@ public class SecurityConfig {
         return authenticationProvider;
     }
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authenticationProvider(authenticationProvider());
-        http.authorizeHttpRequests(authz -> authz
+        http.authorizeHttpRequests(authorization -> authorization
                         .requestMatchers("/book").hasAnyAuthority(RoleType.USER.name())
                         .requestMatchers("/books").hasAuthority(RoleType.ADMIN.name())
                         .requestMatchers("/book/v2").hasAnyAuthority(RoleType.ADMIN.name())
                         .anyRequest().authenticated()
                 )
-                .userDetailsService(userDetailsService)
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
