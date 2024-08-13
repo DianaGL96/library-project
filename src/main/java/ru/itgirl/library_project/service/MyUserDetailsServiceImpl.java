@@ -1,30 +1,21 @@
 package ru.itgirl.library_project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.itgirl.library_project.model.Role;
-import ru.itgirl.library_project.model.User;
-import ru.itgirl.library_project.repository.UserRepository;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import ru.itgirl.library_project.model.MyUser;
+import ru.itgirl.library_project.repository.MyUserRepository;
 
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private final UserRepository userRepository;
+    private final MyUserRepository userRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository){
+    public MyUserDetailsServiceImpl(MyUserRepository userRepository){
         this.userRepository = userRepository;
     }
 
@@ -35,9 +26,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userRepository.findByLogin(login)
+        MyUser user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return UserDetailsImpl.build(user);
+        return MyUserDetailsImpl.build(user);
 
         //List<SimpleGrantedAuthority>authorities = Arrays.stream(user.getRoles().split(","))
                 //.map(SimpleGrantedAuthority::new)

@@ -1,7 +1,6 @@
 package ru.itgirl.library_project.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +11,7 @@ import java.util.Set;
 //@Getter
 @Entity
 @Table (name = "users")
-public class User {
+public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
@@ -36,11 +35,11 @@ public class User {
     )
     private Set<Role>roles = new HashSet<>();
 
-    public User (String login) {
+    public MyUser(String login) {
         this.login = login;
     }
 
-    public User(){
+    public MyUser(){
 
     }
 
