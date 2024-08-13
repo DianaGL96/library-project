@@ -3,6 +3,9 @@ package ru.itgirl.library_project.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 //@AllArgsConstructor
 //@NoArgsConstructor
 //@Builder
@@ -23,9 +26,13 @@ public class User {
     //@Setter
     private String password;
 
-    @Column(name = "roles")
-    //@Setter
-    private String roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_role",
+            inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id", table = "users"),
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", table = "role")
+    )
+    private Set<Role>roles = new HashSet<>();
 
     public User(){
 
@@ -33,6 +40,10 @@ public class User {
 
     public User (String login) {
         this.login = login;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getLogin() {
@@ -51,12 +62,8 @@ public class User {
         this.password = password;
     }
 
-    public String getRoles() {
+    public Set<Role> getRoles() {
         return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
     }
 
     @Override

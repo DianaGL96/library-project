@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-
-    <changeSet id="init db" author="author name">
+<changeSet id="init db" author="author name">
         <sql>
             Create table if not exists author (
             id bigserial PRIMARY KEY,
@@ -59,7 +52,8 @@
 
         </sql>
     </changeSet>
-    <changeSet id="add-users-table" author="your_name">
+
+    <changeSet id="add-users-table" author="author name">
         <sql>
             CREATE TABLE IF NOT EXISTS users (
             id BIGSERIAL PRIMARY KEY,
@@ -67,6 +61,25 @@
             password VARCHAR(255) NOT NULL,
             roles VARCHAR(255) NOT NULL
             );
+
+            Insert into users(login, password, roles) values
+            ('Inga', 'password1', 'USER'),
+            ('Diana', 'adminpassword1', 'ADMIN'),
+            ('Ars', 'password2', 'USER,ADMIN),
+            ('Ruslan', 'password3', 'USER'),
+            ('Kira', 'password4', 'USER');
         </sql>
     </changeSet>
-</databaseChangeLog>
+
+<changeSet id="add-role-table" author="author name">
+<sql>
+    CREATE TABLE IF NOT EXISTS role (
+    id BIGSERIAL PRIMARY KEY,
+    role_name VARCHAR(255) NOT NULL
+    );
+
+    Insert into role(login, password, roles) values
+    ('USER'),
+    ('ADMIN');
+</sql>
+</changeSet>
