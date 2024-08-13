@@ -3,7 +3,6 @@ package ru.itgirl.library_project.service;
 import ru.itgirl.library_project.dto.AuthorCreateDto;
 import ru.itgirl.library_project.dto.AuthorDto;
 import ru.itgirl.library_project.dto.AuthorUpdateDto;
-import ru.itgirl.library_project.dto.BookDto;
 
 import java.util.List;
 
