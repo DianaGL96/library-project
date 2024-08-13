@@ -46,7 +46,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorization -> authorization
                         .requestMatchers("/book").hasAnyAuthority(RoleType.USER.name())
                         .requestMatchers("/books").hasAuthority(RoleType.ADMIN.name())
-                        .requestMatchers("/book/v2").hasAnyAuthority(RoleType.ADMIN.name())
+                        .requestMatchers("/book/v2").hasAuthority(RoleType.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
