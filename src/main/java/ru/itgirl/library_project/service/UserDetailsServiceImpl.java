@@ -26,10 +26,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    //@Bean
+    //public BCryptPasswordEncoder passwordEncoder() {
+        //return new BCryptPasswordEncoder();
+    //}
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

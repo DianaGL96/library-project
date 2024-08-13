@@ -65,7 +65,7 @@
             Insert into users(login, password, roles) values
             ('Inga', 'password1', 'USER'),
             ('Diana', 'adminpassword1', 'ADMIN'),
-            ('Ars', 'password2', 'USER,ADMIN),
+            ('Ars', 'password2', 'USER,ADMIN'),
             ('Ruslan', 'password3', 'USER'),
             ('Kira', 'password4', 'USER');
         </sql>
@@ -78,7 +78,7 @@
     role_name VARCHAR(255) NOT NULL
     );
 
-    Insert into role(login, password, roles) values
+    Insert into role(role_name) values
     ('USER'),
     ('ADMIN');
 </sql>
