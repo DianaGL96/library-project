@@ -64,8 +64,7 @@
             CREATE TABLE IF NOT EXISTS users (
             id BIGSERIAL PRIMARY KEY,
             login VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            roles VARCHAR(255) NOT NULL
+            password VARCHAR(255) NOT NULL
             );
 
             INSERT INTO users(login, password) VALUES
@@ -100,7 +99,6 @@
             PRIMARY KEY (user_id, role_id)
             );
 
-            -- Добавление связей пользователей и ролей
             INSERT INTO user_role(user_id, role_id) VALUES
             (1, 1),
             (2, 2),
