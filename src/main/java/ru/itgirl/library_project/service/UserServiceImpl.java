@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import ru.itgirl.library_project.model.User;
 import ru.itgirl.library_project.repository.UserRepository;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImpl implements UserDetailsService {
@@ -17,6 +21,7 @@ public class UserServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
@@ -24,14 +29,17 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userRepository.findByUserLogin(login)
+        User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         //List<SimpleGrantedAuthority>authorities = Arrays.stream(user.getRoles().split(","))
                 //.map(SimpleGrantedAuthority::new)
                 //.collect(Collectors.toList());
 
-        String[] authorities = user.getRoles().split(",");
+        String[] roles = user.getRoles().split(",");
+        List<SimpleGrantedAuthority> authorities = Arrays.stream(roles)
+                .map(role -> new SimpleGrantedAuthority(role))
+                .collect(Collectors.toList());
 
         return org.springframework.security.core.userdetails.User.withUsername(user.getLogin())
         .password(user.getPassword())
@@ -43,7 +51,7 @@ public class UserServiceImpl implements UserDetailsService {
         String encodedPassword = passwordEncoder.encode(password);
         User user = new User();
         user.setLogin(login);
-        user.setPassword(password);
+        user.setPassword(encodedPassword);
         user.setRoles(roles);
 
         return userRepository.save(user);

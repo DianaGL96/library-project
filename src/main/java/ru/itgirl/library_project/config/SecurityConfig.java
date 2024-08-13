@@ -23,8 +23,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authozire) ->
-                        authozire.requestMatchers("/book").hasRole("USER")
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/book").hasRole("USER")
                                 .requestMatchers("/book/v2").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
