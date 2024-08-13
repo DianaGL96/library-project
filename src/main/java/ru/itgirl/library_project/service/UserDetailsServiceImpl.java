@@ -8,11 +8,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.itgirl.library_project.model.Role;
 import ru.itgirl.library_project.model.User;
 import ru.itgirl.library_project.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -51,6 +53,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //.authorities(authorities)
         //.build();
     }
+
 
     //public User createUser (String login, String password, String roles) {
         //String encodedPassword = passwordEncoder.encode(password);

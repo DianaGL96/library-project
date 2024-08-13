@@ -109,4 +109,16 @@
         </sql>
     </changeSet>
 
+    <changeSet id="add-role-book-table" author="author name">
+        <sql>
+            CREATE TABLE IF NOT EXISTS role_book (
+            role_id BIGINT NOT NULL,
+            book_id BIGINT NOT NULL,
+            FOREIGN KEY (role_id) REFERENCES role (id),
+            FOREIGN KEY (book_id) REFERENCES book (id),
+            PRIMARY KEY (role_id, book_id);
+
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
