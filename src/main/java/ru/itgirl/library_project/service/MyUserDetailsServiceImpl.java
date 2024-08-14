@@ -14,20 +14,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Service
 public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private final MyUserRepository userRepository;
+    private final MyUserRepository myUserRepository;
 
     @Autowired
-    public MyUserDetailsServiceImpl(MyUserRepository userRepository, PasswordEncoder passwordEncoder){
-        this.userRepository = userRepository;
+    public MyUserDetailsServiceImpl(MyUserRepository myUserRepository){
+        this.myUserRepository = myUserRepository;
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        MyUser user = userRepository.findByLogin(login)
+        MyUser myUser = myUserRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        return MyUserDetailsImpl.build(user);
+        return MyUserDetailsImpl.build(myUser);
 
         //List<SimpleGrantedAuthority>authorities = Arrays.stream(user.getRoles().split(","))
                 //.map(SimpleGrantedAuthority::new)

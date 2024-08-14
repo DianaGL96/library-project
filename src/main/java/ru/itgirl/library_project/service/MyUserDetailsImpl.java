@@ -22,13 +22,13 @@ public class MyUserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static MyUserDetailsImpl build(MyUser user){
-        List<GrantedAuthority>authoritiesList = user.getRoles().stream()
+    public static MyUserDetailsImpl build(MyUser myUser){
+        List<GrantedAuthority>authoritiesList = myUser.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
                 .collect(Collectors.toList());
-        return new MyUserDetailsImpl(user.getId(),
-        user.getLogin(),
-        user.getPassword(),
+        return new MyUserDetailsImpl(myUser.getId(),
+        myUser.getLogin(),
+        myUser.getPassword(),
         authoritiesList);
     }
 

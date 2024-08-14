@@ -34,6 +34,18 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
+
+    @Bean
+    public AuthenticationManager authorizationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
@@ -46,17 +58,6 @@ public class SecurityConfig {
                 )
                 .httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
-    }
-
-    @Bean
-    public AuthenticationManager authorizationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
-
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 
