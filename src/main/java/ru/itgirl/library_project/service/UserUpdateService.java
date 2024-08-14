@@ -4,30 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itgirl.library_project.model.MyUser;
-import ru.itgirl.library_project.model.Role;
 import ru.itgirl.library_project.repository.MyUserRepository;
 
-import java.util.Set;
+import java.util.List;
 
 //@Service
-//public class UserService {
+//public class UserUpdateService {
 
     //private final MyUserRepository userRepository;
     //private final PasswordEncoder passwordEncoder;
 
     //@Autowired
-    //public UserService(MyUserRepository userRepository, PasswordEncoder passwordEncoder) {
+    //public UserUpdateService(MyUserRepository userRepository, PasswordEncoder passwordEncoder) {
         //this.userRepository = userRepository;
         //this.passwordEncoder = passwordEncoder;
     //}
 
-    //public MyUser createUser(String login, String rawPassword, Set<Role> roles) {
-        //String encodedPassword = passwordEncoder.encode(rawPassword);
-        //MyUser user = new MyUser();
-        //user.setLogin(login);
-        //user.setPassword(encodedPassword);
-        //user.setRoles(roles);
-
-        //return userRepository.save(user);
+    //public void encryptExistingPasswords() {
+        //List<MyUser> users = userRepository.findAll();
+        //for (MyUser user : users) {
+            //String encryptedPassword = passwordEncoder.encode(user.getPassword());
+            //user.setPassword(encryptedPassword);
+            //userRepository.save(user);
+        //}
     //}
 //}
