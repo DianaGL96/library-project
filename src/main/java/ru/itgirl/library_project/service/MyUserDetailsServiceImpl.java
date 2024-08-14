@@ -15,12 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private final MyUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public MyUserDetailsServiceImpl(MyUserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -28,11 +26,6 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         MyUser user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        if (!user.getPassword().startsWith("$2a$")) { // BCrypt пароли начинаются с "$2a$"
-            user.setPassword(passwordEncoder.encode(user.getPassword())); // Используем внедренный passwordEncoder
-            userRepository.save(user);
-        }
 
         return MyUserDetailsImpl.build(user);
 
