@@ -68,11 +68,11 @@
             );
 
             INSERT INTO users(login, password) VALUES
-            ('Inga', '$2a$10$somethingencrypted'),
-            ('Diana', '$2a$10$anotherencryptedpassword'),
-            ('Ars', '$2a$10$moreencryptedpasswords'),
-            ('Ruslan', '$2a$10$encryptedpassword'),
-            ('Kira', '$2a$10$anotheroneencryptedpassword');
+            ('Inga', 'password1'),
+            ('Diana', 'adminpassword1'),
+            ('Ars', 'password2'),
+            ('Ruslan', 'password3'),
+            ('Kira', 'password4');
         </sql>
     </changeSet>
 
