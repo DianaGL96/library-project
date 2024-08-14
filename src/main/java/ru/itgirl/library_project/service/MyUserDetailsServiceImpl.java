@@ -1,9 +1,11 @@
 package ru.itgirl.library_project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itgirl.library_project.model.MyUser;
 import ru.itgirl.library_project.repository.MyUserRepository;
@@ -19,15 +21,21 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    //@Bean
-    //public BCryptPasswordEncoder passwordEncoder() {
-        //return new BCryptPasswordEncoder();
-    //}
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         MyUser user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (!user.getPassword().startsWith("$2a$")) { // BCrypt пароли начинаются с "$2a$"
+            user.setPassword(passwordEncoder().encode(user.getPassword()));
+            userRepository.save(user);
+        }
+
         return MyUserDetailsImpl.build(user);
 
         //List<SimpleGrantedAuthority>authorities = Arrays.stream(user.getRoles().split(","))
