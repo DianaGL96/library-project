@@ -68,11 +68,11 @@
             );
 
             INSERT INTO users(login, password) VALUES
-            ('Inga', '$2a$10$Dow/JmklUw4ZP2PSFgB0R.PmB4uFgX/JflhriU1FybW.EO8Fb5f2a'),
-            ('Diana', '$2a$10$Dow/JmklUw4ZP2PSFgB0R.PmB4uFgX/JflhriU1FybW.EO8Fb5f2a'),
-            ('Ars', '$2a$10$Dow/JmklUw4ZP2PSFgB0R.PmB4uFgX/JflhriU1FybW.EO8Fb5f2a'),
-            ('Ruslan', '$2a$10$Dow/JmklUw4ZP2PSFgB0R.PmB4uFgX/JflhriU1FybW.EO8Fb5f2a'),
-            ('Kira', '$2a$10$Dow/JmklUw4ZP2PSFgB0R.PmB4uFgX/JflhriU1FybW.EO8Fb5f2a');
+            ('Inga', 'password1'),
+            ('Diana', 'adminpassword1'),
+            ('Ars', 'password2'),
+            ('Ruslan', 'password3'),
+            ('Kira', 'password4');
         </sql>
     </changeSet>
 

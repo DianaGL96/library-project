@@ -25,7 +25,7 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
-    private DaoAuthenticationProvider daoAuthenticationProvider(){
+    private DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -33,17 +33,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .authenticationProvider(daoAuthenticationProvider())
-            .authorizeHttpRequests(authorization -> authorization
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        httpSecurity.authenticationProvider(authenticationProvider());
+        httpSecurity.authorizeHttpRequests(authorization -> authorization
                         .requestMatchers("/book").hasAnyAuthority(RoleType.USER.name())
                         .requestMatchers("/books").hasAuthority(RoleType.ADMIN.name())
                         .requestMatchers("/book/v2").hasAuthority(RoleType.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
-        return http.build();
+        return httpSecurity.build();
     }
 
     @Bean
