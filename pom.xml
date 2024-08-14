@@ -83,9 +83,16 @@
 					</excludes>
 				</configuration>
 			</plugin>
-		</plugins>
-	</build>
-
+	<plugin>
+		<groupId>org.liquibase</groupId>
+		<artifactId>liquibase-maven-plugin</artifactId>
+		<version>4.27.0</version>
+		<configuration>
+			<propertyFile>src/main/resources/liquibase.properties</propertyFile>
+		</configuration>
+	</plugin>
+</plugins>
+		</build>
 	<repositories>
 		<repository>
 			<id>central</id>
