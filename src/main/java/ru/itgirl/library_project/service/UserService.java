@@ -9,25 +9,25 @@ import ru.itgirl.library_project.repository.MyUserRepository;
 
 import java.util.Set;
 
-//@Service
-//public class UserService {
+@Service
+public class UserService {
 
-    //private final MyUserRepository userRepository;
-    //private final PasswordEncoder passwordEncoder;
+    private final MyUserRepository myUserRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    //@Autowired
-    //public UserService(MyUserRepository userRepository, PasswordEncoder passwordEncoder) {
-        //this.userRepository = userRepository;
-        //this.passwordEncoder = passwordEncoder;
-    //}
+    @Autowired
+    public UserService(MyUserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.myUserRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    //public MyUser createUser(String login, String rawPassword, Set<Role> roles) {
-        //String encodedPassword = passwordEncoder.encode(rawPassword);
-        //MyUser user = new MyUser();
-        //user.setLogin(login);
-        //user.setPassword(encodedPassword);
-        //user.setRoles(roles);
+    public MyUser createUser(String login, String rawPassword, Set<Role> roles) {
+        String encodedPassword = passwordEncoder.encode(rawPassword);
+        MyUser user = new MyUser();
+        user.setLogin(login);
+        user.setPassword(encodedPassword);
+        user.setRoles(roles);
 
-        //return userRepository.save(user);
-    //}
-//}
+        return myUserRepository.save(user);
+    }
+}
