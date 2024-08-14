@@ -5,26 +5,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itgirl.library_project.model.MyUser;
 import ru.itgirl.library_project.repository.MyUserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Service
 public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private final MyUserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public MyUserDetailsServiceImpl(MyUserRepository userRepository){
+    public MyUserDetailsServiceImpl(MyUserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -32,7 +30,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         if (!user.getPassword().startsWith("$2a$")) { // BCrypt пароли начинаются с "$2a$"
-            user.setPassword(passwordEncoder().encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(user.getPassword())); // Используем внедренный passwordEncoder
             userRepository.save(user);
         }
 
