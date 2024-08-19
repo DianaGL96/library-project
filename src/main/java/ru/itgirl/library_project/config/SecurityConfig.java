@@ -51,9 +51,9 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.authenticationProvider(authenticationProvider());
         httpSecurity.authorizeHttpRequests(authorization -> authorization
-                        .requestMatchers("/book").hasAnyAuthority(RoleType.USER.name())
-                        .requestMatchers("/book/v2").hasAuthority(RoleType.ADMIN.name())
-                        .requestMatchers("/book/v3").hasAuthority(RoleType.ADMIN.name())
+                        .requestMatchers("/book").hasRole(RoleType.USER.name())
+                        .requestMatchers("/book/v2").hasRole(RoleType.ADMIN.name())
+                        .requestMatchers("/book/v3").hasRole(RoleType.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
