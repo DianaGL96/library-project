@@ -17,7 +17,7 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/book")
-    BookDto getBookByName(@RequestParam("name") String name) {
+    BookDto getBookByNameV1(@RequestParam("name") String name) {
         return bookService.getByNameV1(name);
     }
 
