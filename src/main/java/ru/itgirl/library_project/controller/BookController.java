@@ -9,6 +9,8 @@ import ru.itgirl.library_project.dto.BookDto;
 import ru.itgirl.library_project.dto.BookUpdateDto;
 import ru.itgirl.library_project.service.BookService;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class BookController {
@@ -33,13 +35,20 @@ public class BookController {
     BookDto createBook(@RequestBody BookCreateDto bookCreateDto) {
         return bookService.createBook(bookCreateDto);
     }
+
     @PutMapping("/book/update")
     BookDto updateBook(@RequestBody BookUpdateDto bookUpdateDto) {
         return bookService.updateBook(bookUpdateDto);
     }
+
     @DeleteMapping("/book/delete/{id}")
     void deleteBook(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
+    }
+
+    @GetMapping("/books")
+    List<BookDto> getAllBooks() {
+        return bookService.getAllBooks();
     }
 }
 
